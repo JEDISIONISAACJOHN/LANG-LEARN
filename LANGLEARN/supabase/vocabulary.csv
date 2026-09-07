@@ -1,0 +1,6 @@
+language_id,lesson_id,word,root_word,pronunciation,part_of_speech,translations,example_target,example_translations,audio_url
+hi,basics_1,नमस्ते,नमस्,namaste,greeting,"{""en"": ""Hello""}",नमस्ते!,"{""en"": ""Hello!""}",
+hi,basics_1,धन्यवाद,धन्यवाद,dhanyavaad,noun,"{""en"": ""Thank you""}",मदद के लिए धन्यवाद।,"{""en"": ""Thank you for the help.""}",
+ta,basics_1,வணக்கம்,வணக்கம்,vanakkam,greeting,"{""en"": ""Hello""}",வணக்கம் நண்பரே,"{""en"": ""Hello friend""}",
+ta,basics_1,நன்றி,நன்றி,nandri,noun,"{""en"": ""Thank you""}",மிக்க நன்றி,"{""en"": ""Thank you very much""}",
+kn,basics_1,ನಮಸ್ಕಾರ,ನಮಸ್ಕಾರ,namaskara,greeting,"{""en"": ""Hello""}",ನಮಸ್ಕಾರ! ಹೇಗಿದ್ದೀರಾ?,"{""en"": ""Hello! How are you?""}",
