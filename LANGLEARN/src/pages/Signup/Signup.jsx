@@ -2,11 +2,15 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../services/auth'
+import { useAppSound } from '../../services/sound'
 import LangLearnLogo from '../../components/Logo/LangLearnLogo'
+import { Sparkles, ArrowRight } from 'lucide-react'
 
 export default function Signup() {
   const navigate = useNavigate()
   const { signup, loginWithGoogle } = useAuth()
+  const { playClick, playSuccess, playError } = useAppSound()
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,11 +48,14 @@ export default function Signup() {
   }
 
   const handleGoogleSignup = async () => {
+    playClick()
     setLoading(true)
     try {
       await loginWithGoogle()
+      playSuccess()
       navigate('/dashboard')
     } catch (error) {
+      playError()
       setErrors({ general: error.message || 'Google sign-in failed' })
     } finally {
       setLoading(false)
@@ -57,12 +64,17 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    playClick()
     
-    if (!validate()) return
+    if (!validate()) {
+      playError()
+      return
+    }
     
     setLoading(true)
     try {
       await signup(formData.name, formData.email, formData.password)
+      playSuccess()
       navigate('/login', {
         state: {
           successMessage: 'Account created successfully! Please log in with your credentials.',
@@ -70,6 +82,7 @@ export default function Signup() {
         },
       })
     } catch (error) {
+      playError()
       setErrors({ general: error.message || 'Failed to create account. Please try again.' })
     } finally {
       setLoading(false)
@@ -91,31 +104,79 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-4">
-      <motion.div
-        className="w-full max-w-md"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      >
-        <div className="soft-card p-8">
-          <div className="text-center mb-6">
-            <div className="flex justify-center mb-3">
-              <LangLearnLogo size="medium" />
+    <div className="min-h-screen bg-background flex">
+      {/* Left side - Visual/Branding (Hidden on mobile) */}
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primary to-accent-primary p-12 flex-col justify-between relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-white opacity-5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] h-[30rem] bg-accent-secondary opacity-10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="bg-white p-2 rounded-2xl">
+              <LangLearnLogo size="small" />
             </div>
-            <h1 className="text-2xl font-black text-slate-800 dark:text-white mb-1">Create account</h1>
-            <p className="text-sm text-slate-500">Start your Indian language journey with LangLearn</p>
+            <span className="text-white text-2xl font-black tracking-tight">LangLearn</span>
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-bold uppercase tracking-wider backdrop-blur-md mb-6 border border-white/20">
+              <Sparkles size={16} /> Begin Your Journey
+            </div>
+            <h1 className="text-5xl xl:text-6xl font-black text-white leading-tight mb-6">
+              Unlock the World of Indian Languages.
+            </h1>
+            <p className="text-white/80 text-xl font-medium max-w-md">
+              Learn Hindi, Tamil, Telugu, and more with our adaptive AI and immersive stories.
+            </p>
+          </motion.div>
+        </div>
+        
+        <div className="relative z-10 bg-white/10 p-6 rounded-3xl backdrop-blur-md border border-white/20 max-w-sm">
+          <p className="text-white font-medium italic">"The gamified approach combined with cultural stories makes learning incredibly addictive."</p>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-accent-primary flex items-center justify-center text-white font-bold">A</div>
+            <div>
+              <p className="text-white font-bold text-sm">Anita K.</p>
+              <p className="text-white/70 text-xs">Learning Telugu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right side - Signup Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 overflow-y-auto">
+        <motion.div
+          className="w-full max-w-md py-10"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+        >
+          {/* Mobile Logo */}
+          <div className="flex lg:hidden items-center justify-center gap-3 mb-10">
+            <LangLearnLogo size="small" />
+            <span className="text-text-primary text-3xl font-black tracking-tight">LangLearn</span>
+          </div>
+
+          <div className="text-center lg:text-left mb-10">
+            <h2 className="text-4xl font-black text-text-primary mb-3">Create Account</h2>
+            <p className="text-text-secondary text-lg font-medium">Start your learning journey today</p>
           </div>
 
           {errors.general && (
-            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-red-600 dark:text-red-400 text-sm">
+            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} className="mb-6 p-4 bg-error/10 border border-error/20 rounded-[1rem] text-error text-sm font-medium flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-error"></div>
               {errors.general}
-            </div>
+            </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-1">
+              <label htmlFor="name" className="block text-sm font-bold text-text-primary uppercase tracking-wider ml-1">
                 Name
               </label>
               <input
@@ -124,16 +185,16 @@ export default function Signup() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.name ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.name ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
                 placeholder="Enter your name"
               />
-              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+              {errors.name && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.name}</p>}
             </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <div className="space-y-1">
+              <label htmlFor="email" className="block text-sm font-bold text-text-primary uppercase tracking-wider ml-1">
                 Email
               </label>
               <input
@@ -142,16 +203,16 @@ export default function Signup() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.email ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.email ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
-                placeholder="Enter your email"
+                placeholder="hello@example.com"
               />
-              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+              {errors.email && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.email}</p>}
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <div className="space-y-1">
+              <label htmlFor="password" className="block text-sm font-bold text-text-primary uppercase tracking-wider ml-1">
                 Password
               </label>
               <input
@@ -160,16 +221,16 @@ export default function Signup() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.password ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.password ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
-                placeholder="Create a password"
+                placeholder="Create a password (min. 6 chars)"
               />
-              {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
+              {errors.password && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.password}</p>}
             </div>
 
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+            <div className="space-y-1">
+              <label htmlFor="confirmPassword" className="block text-sm font-bold text-text-primary uppercase tracking-wider ml-1">
                 Confirm Password
               </label>
               <input
@@ -178,35 +239,37 @@ export default function Signup() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.confirmPassword ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.confirmPassword ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
                 placeholder="Confirm your password"
               />
-              {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
+              {errors.confirmPassword && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.confirmPassword}</p>}
             </div>
 
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-md shadow-indigo-200 dark:shadow-none transition-all active:scale-95 disabled:opacity-70"
+              className="w-full py-4 px-6 bg-primary hover:bg-accent-primary text-white rounded-[1.25rem] font-black uppercase tracking-widest flex items-center justify-center gap-2 shadow-glow transition-all active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? 'Creating account...' : (
+                <>Sign Up <ArrowRight size={20} /></>
+              )}
             </button>
 
-            <div className="relative my-6">
+            <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200 dark:border-slate-700" />
+                <div className="w-full border-t border-border-subtle" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-3 bg-white dark:bg-slate-900 text-slate-500">Or continue with</span>
+              <div className="relative flex justify-center text-sm font-bold uppercase tracking-widest">
+                <span className="px-4 bg-background text-text-muted">Or</span>
               </div>
             </div>
 
             <button
               type="button"
               onClick={handleGoogleSignup}
-              className="w-full py-3 px-4 flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95"
+              className="w-full py-4 px-6 flex items-center justify-center gap-3 bg-surface hover:bg-surface-hover border-2 border-border-subtle text-text-primary rounded-[1.25rem] font-black transition-all active:scale-[0.98]"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -218,14 +281,14 @@ export default function Signup() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-8 text-center text-text-secondary font-medium">
             Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+            <Link to="/login" onClick={() => playClick()} className="text-primary font-black hover:text-accent-primary transition-colors">
               Log in
             </Link>
           </p>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   )
 }

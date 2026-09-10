@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Home, BookA, Target, Trophy, User, Settings, BookOpen, Bot, Layers } from 'lucide-react'
+import { Home, BookA, Target, Trophy, User, Settings, BookOpen, Bot, Layers, FileText } from 'lucide-react'
 import LangLearnLogo from '../Logo/LangLearnLogo'
 import AlphabetModal from '../AlphabetModal/AlphabetModal'
 import { useAuth } from '../../services/auth'
@@ -24,6 +24,7 @@ export default function AppSidebar() {
     { to: '/practice', label: t('practice') || 'PRACTICE', icon: Target },
     { to: '/leaderboard', label: t('leaderboard') || 'LEADERBOARDS', icon: Trophy },
     { to: '/curriculum', label: t('curriculum') || 'CURRICULUM', icon: Layers },
+    { to: '/report', label: t('report') || 'REPORT', icon: FileText },
     { to: '/profile', label: t('profile') || 'PROFILE', icon: User },
     { to: '/settings', label: t('settings') || 'SETTINGS', icon: Settings },
   ]
@@ -33,7 +34,7 @@ export default function AppSidebar() {
       {/* ======================================================== */}
       {/* 1. DESKTOP FIXED LEFT SIDEBAR (Floating Soft UI)         */}
       {/* ======================================================== */}
-      <aside className="hidden md:flex flex-col justify-between w-60 h-[calc(100vh-2rem)] fixed left-4 top-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-[2rem] shadow-soft border border-white/50 dark:border-slate-700/50 p-4 z-40">
+      <aside className="hidden md:flex flex-col justify-between w-60 h-[calc(100vh-2rem)] fixed left-4 top-4 glass-panel rounded-[2rem] p-4 z-40">
         <div>
           {/* Logo Brand Header */}
           <NavLink to="/dashboard" className="block px-2 py-2 mb-4 hover:scale-105 transition-transform">
@@ -49,7 +50,7 @@ export default function AppSidebar() {
                   <button
                     key={idx}
                     onClick={() => setShowAlphabetModal(true)}
-                    className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-extrabold text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:bg-pastel-pink dark:hover:bg-slate-800 hover:text-brand-primary dark:hover:text-white hover:scale-[1.02] transition-all text-left group border-2 border-transparent hover:border-pink-200"
+                    className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-extrabold text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-brand-primary dark:hover:text-white transition-all text-left group border-2 border-transparent hover:bg-white/50 dark:hover:bg-slate-800/50"
                   >
                     <Icon size={22} className="text-slate-500 group-hover:text-brand-primary transition-colors" />
                     <span>{item.label}</span>
@@ -64,11 +65,11 @@ export default function AppSidebar() {
                   to={item.to}
                   className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl font-extrabold text-sm uppercase tracking-wider transition-all ${
                     isActive
-                      ? 'bg-pastel-blue dark:bg-indigo-900/30 border-2 border-brand-primary-light dark:border-indigo-600 text-brand-primary dark:text-indigo-300 shadow-sm scale-[1.02]'
-                      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:scale-[1.02] hover:text-slate-800 dark:hover:text-white border-2 border-transparent'
+                      ? 'btn-gamified w-full'
+                      : 'text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-slate-800 dark:hover:text-white border-2 border-transparent'
                   }`}
                 >
-                  <Icon size={22} className={isActive ? 'text-brand-primary dark:text-indigo-400' : 'text-slate-400 group-hover:text-slate-500'} />
+                  <Icon size={22} className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-500'} />
                   <span>{item.label}</span>
                 </NavLink>
               )

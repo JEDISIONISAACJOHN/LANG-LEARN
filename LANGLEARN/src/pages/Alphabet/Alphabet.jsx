@@ -6,7 +6,7 @@ import { useProgress } from '../../services/progress'
 import { alphabetDataByLanguage } from '../../data/alphabets'
 import { getLanguageById } from '../../data/languages'
 import { AudioService } from '../../services/audio/AudioService'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import RightSidebar from '../../components/RightSidebar/RightSidebar'
 import { Volume2, Sparkles, BookOpen, CheckCircle2, XCircle, RotateCcw, Award } from 'lucide-react'
 
@@ -76,10 +76,10 @@ export default function Alphabet() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
-      <AppSidebar />
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
 
-      <main className="flex-1 max-w-[680px] md:ml-64 px-4 py-6 md:py-8 space-y-6">
+
+      <main className="flex-1 max-w-[680px] px-4 py-6 md:py-8 space-y-6">
         {/* Banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 p-6 md:p-8 text-white shadow-xl mb-8">
           <div className="relative z-10">

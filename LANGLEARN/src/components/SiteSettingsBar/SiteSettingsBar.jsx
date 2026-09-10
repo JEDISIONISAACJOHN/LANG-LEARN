@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Palette, Globe, Check, Sun, Moon, Sparkles, Leaf, X } from 'lucide-react'
 import { useTheme } from '../../services/themeContext'
+import { useAuth } from '../../services/auth'
 import { languages } from '../../data/languages'
 import LanguageFlag from '../LanguageFlag/LanguageFlag'
 
@@ -14,6 +15,7 @@ const THEMES = [
 
 export default function SiteSettingsBar() {
   const { theme, setTheme, siteLanguage, setSiteLanguage, t } = useTheme()
+  const { user, updateUser } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef(null)
 
@@ -28,7 +30,7 @@ export default function SiteSettingsBar() {
   }, [])
 
   return (
-    <div className="fixed bottom-5 right-5 z-40" ref={menuRef}>
+    <div className="fixed top-4 right-4 md:top-6 md:right-8 z-[100]" ref={menuRef}>
       {/* Floating Trigger Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
@@ -46,10 +48,10 @@ export default function SiteSettingsBar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 15 }}
+            initial={{ opacity: 0, scale: 0.9, y: -15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 15 }}
-            className="absolute bottom-14 right-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-5 z-50 overflow-hidden"
+            exit={{ opacity: 0, scale: 0.9, y: -15 }}
+            className="absolute top-14 right-0 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl p-5 z-50 overflow-hidden"
           >
             {/* Header */}
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
@@ -103,12 +105,12 @@ export default function SiteSettingsBar() {
               <p className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
                 {t('site_language')} (UI Text)
               </p>
-              <div className="max-h-44 overflow-y-auto space-y-1 pr-1">
+              <div className="max-h-32 overflow-y-auto space-y-1 pr-1">
                 {languages.map((lang) => {
                   const isSelected = siteLanguage === lang.id
                   return (
                     <button
-                      key={lang.id}
+                      key={`site-${lang.id}`}
                       onClick={() => setSiteLanguage(lang.id)}
                       className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-left text-xs transition-all cursor-pointer ${
                         isSelected
@@ -127,9 +129,44 @@ export default function SiteSettingsBar() {
               </div>
             </div>
 
+            {/* Learning Language (Content) */}
+            {user && (
+              <div className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800">
+                <p className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+                  Learning Language (Content)
+                </p>
+                <div className="max-h-32 overflow-y-auto space-y-1 pr-1">
+                  {languages.map((lang) => {
+                    const isSelected = user?.learningLanguage === lang.id
+                    return (
+                      <button
+                        key={`learn-${lang.id}`}
+                        onClick={() => {
+                          if (updateUser) {
+                            updateUser({ learningLanguage: lang.id })
+                          }
+                        }}
+                        className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl text-left text-xs transition-all cursor-pointer ${
+                          isSelected
+                            ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 font-bold'
+                            : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <LanguageFlag languageId={lang.id} size={18} />
+                          <span>{lang.name} ({lang.nativeName})</span>
+                        </div>
+                        {isSelected && <Check size={14} />}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Footer tip */}
             <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 text-center text-[11px] text-slate-400 font-medium">
-              Theme automatically persists in browser
+              Changes save automatically
             </div>
           </motion.div>
         )}

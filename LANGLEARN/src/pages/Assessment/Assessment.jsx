@@ -63,6 +63,15 @@ function PersonalizedPlanScreen({ plan, user, onContinue }) {
 
         <div className="p-4.5 rounded-3xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 text-center">
           <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+            <Sparkles size={14} /> Learning Style
+          </div>
+          <p className="text-sm font-extrabold text-indigo-600 dark:text-indigo-400 mt-1 capitalize">
+            {plan?.learningStyle || 'Balanced'}
+          </p>
+        </div>
+
+        <div className="p-4.5 rounded-3xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 text-center">
+          <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
             <Target size={14} /> Primary Goal
           </div>
           <p className="text-sm font-extrabold text-slate-800 dark:text-white mt-1 capitalize">
@@ -162,6 +171,8 @@ export default function Assessment() {
           languageId: user.learningLanguage,
           ageRange: user.ageRange || 'adult',
           goal: user.goal || 'conversation',
+          learningStyle: user.learningStyle || 'visual',
+          interests: user.interests || 'culture',
           count: 5,
         })
         if (!cancelled) {
@@ -219,6 +230,8 @@ export default function Assessment() {
         languageId: user.learningLanguage,
         ageRange: user.ageRange || 'adult',
         goal: user.goal || 'conversation',
+        learningStyle: user.learningStyle || 'visual',
+        interests: user.interests || 'culture',
         level,
         assessmentScore: percentage,
         dailyGoal: user.dailyGoal || 10,
@@ -229,6 +242,7 @@ export default function Assessment() {
       const fallback = {
         startingLevel: level.charAt(0).toUpperCase() + level.slice(1),
         goal: (user.goal || 'conversation').charAt(0).toUpperCase() + (user.goal || 'conversation').slice(1),
+        learningStyle: (user.learningStyle || 'visual').charAt(0).toUpperCase() + (user.learningStyle || 'visual').slice(1),
         dailyPractice: `${user.dailyGoal || 10} min`,
         focusAreas: ['Everyday conversation', 'Essential vocabulary', 'Listening', 'Speaking'],
         recommendedFirstLesson: 'Greetings & Salutations',
@@ -351,9 +365,9 @@ export default function Assessment() {
             <div className="flex justify-center">
               <SpeakingExercise
                 targetWord={q.targetWord || q.correctAnswer}
-                languageCode={language?.voiceCode || 'hi-IN'}
-                onComplete={(isCorrect) => {
-                  handleAnswer(isCorrect ? q.correctAnswer : '')
+                languageId={user?.learningLanguage || 'hi'}
+                onSubmit={(answer) => {
+                  handleAnswer(answer)
                 }}
               />
             </div>
@@ -428,7 +442,7 @@ export default function Assessment() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center space-y-4">
           <motion.div
             animate={{ rotate: 360 }}
@@ -443,7 +457,7 @@ export default function Assessment() {
 
   if (loadError) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center space-y-4 max-w-sm">
           <div className="text-4xl">⚠️</div>
           <p className="text-rose-500 font-semibold">{loadError}</p>
@@ -455,7 +469,7 @@ export default function Assessment() {
 
   if (generatingPlan) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="text-center space-y-4">
           <motion.div
             animate={{ rotate: 360 }}
@@ -472,7 +486,7 @@ export default function Assessment() {
 
   if (showPlan && plan) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="w-full max-w-xl soft-card p-6 md:p-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl rounded-3xl">
           <PersonalizedPlanScreen plan={plan} user={user} onContinue={handlePlanContinue} />
         </div>
@@ -483,7 +497,7 @@ export default function Assessment() {
   const q = questions[currentQuestion]
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-4 md:p-8 font-sans">
       <div className="w-full max-w-2xl space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,59 +9,56 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Default Light Theme (Minimalist Soft UI) */
 :root {
-  /* Core Brand: Soft Indigo & Violet */
+  /* Futuristic Premium Brand Colors */
+  --brand-primary: #6366F1; /* Indigo */
+  --brand-primary-light: #818CF8;
+  --brand-primary-dark: #4F46E5;
+  
+  --brand-accent-1: #8B5CF6; /* Violet */
+  --brand-accent-2: #06B6D4; /* Cyan */
+  --brand-accent-3: #EC4899; /* Pink */
+  
+  /* Backgrounds */
+  --bg-base: #F8FAFC;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  
+  /* Glass Surfaces */
+  --surface-glass: rgba(255, 255, 255, 0.7);
+  --surface-glass-solid: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-border-subtle: rgba(15, 23, 42, 0.06);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+
+  /* Legacy mappings for Tailwind config */
+  --bg-primary: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-hover: #F1F5F9;
+  --surface-elevated: #FFFFFF;
   --primary: #6366F1;
   --primary-dark: #4F46E5;
   --primary-light: #818CF8;
-  --primary-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-  
-  /* Backgrounds: Ultra-clean soft tinted slate */
-  --background: #F8FAFC;
-  --background-card: #FFFFFF;
-  --background-dark: #F1F5F9;
-  
-  /* Borders and Accents */
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
-  --warm-accent: #F59E0B;
-  
-  /* Typography */
-  --text: #0F172A;
-  --text-light: #64748B;
-  --text-muted: #94A3B8;
-  
-  /* Status Colors */
-  --error: #EF4444;
+  --accent-primary: #8B5CF6;
+  --accent-secondary: #06B6D4;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --border-subtle: #E2E8F0;
   --success: #10B981;
-  --white: #FFFFFF;
-  
-  /* Soft Floating Shadows (Neumorphic-lite) */
-  --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 4px 6px -1px rgba(0, 0, 0, 0.01);
-  --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.08), 0 10px 15px -3px rgba(0, 0, 0, 0.02);
+  --error: #EF4444;
 }
 
-/* Dark Theme (Smooth Dark Slate) */
 [data-theme='dark'] {
-  --primary: #818CF8;
-  --primary-dark: #6366F1;
-  --primary-light: #A5B4FC;
-  --primary-gradient: linear-gradient(135deg, #818CF8 0%, #A78BFA 100%);
-  --background: #0B0F19;
-  --background-card: #131B2E;
-  --background-dark: #1E293B;
-  --border: #1E293B;
-  --border-light: #162035;
-  --warm-accent: #FBBF24;
-  --text: #F8FAFC;
-  --text-light: #94A3B8;
-  --text-muted: #64748B;
-  --error: #F87171;
-  --success: #34D399;
-  --white: #131B2E;
-  --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+  --bg-base: #030712;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  
+  --surface-glass: rgba(15, 23, 42, 0.6);
+  --surface-glass-solid: rgba(15, 23, 42, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-subtle: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -71,159 +68,184 @@ html {
 }
 
 body {
-  font-family: 'Nunito', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Malayalam', 'Noto Sans Kannada', sans-serif;
-  background-color: var(--background);
-  color: var(--text);
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-base);
   line-height: 1.6;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, .font-heading {
-  font-family: 'Nunito', sans-serif;
-  letter-spacing: -0.02em;
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.04em;
 }
 
-/* Custom Sleek Scrollbar */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+/* ==========================================================================
+   AURORA GRADIENT BACKGROUND (Optimized for Performance)
+   ========================================================================== */
+.aurora-bg {
+  position: relative;
+  background-color: var(--bg-base);
+  z-index: 0;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+.aurora-bg::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(ellipse at 10% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
 }
 
-::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 9999px;
+[data-theme='dark'] .aurora-bg::before {
+  background-image: 
+    radial-gradient(ellipse at 10% 10%, rgba(99, 102, 241, 0.20) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(139, 92, 246, 0.20) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
 }
 
-[data-theme='dark'] ::-webkit-scrollbar-thumb {
-  background: #334155;
+/* ==========================================================================
+   GLASSMORPHISM PANELS
+   ========================================================================== */
+.glass-panel {
+  background-color: var(--surface-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
-}
-
-/* Base resets for Soft UI cards */
-.soft-card {
-  background-color: var(--background-card);
-  border-radius: 2rem; /* 32px rounded corners for super soft look */
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.soft-card:hover {
-  box-shadow: var(--shadow-lg);
+.glass-panel:hover {
+  background-color: var(--surface-glass-solid);
   transform: translateY(-2px);
 }
 
-/* Bento Item Glow Effect */
+/* ==========================================================================
+   BENTO GRID LAYOUT
+   ========================================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
 .bento-card {
-  background-color: var(--background-card);
+  @apply glass-panel;
   border-radius: 2rem;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  overflow: hidden;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
-.bento-card:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(99, 102, 241, 0.3);
-  transform: translateY(-3px);
+/* Optional glowing top-edge for premium feel */
+.bento-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand-primary-light), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-/* Gamified Big Buttons (Duolingo Style) */
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   GAMIFIED BUTTONS (Bouncy 3D)
+   ========================================================================== */
 .btn-gamified {
   position: relative;
   border-radius: 1.5rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 1rem 1.5rem;
+  padding: 1rem 2rem;
   border: none;
-  background-color: var(--primary);
+  background-color: var(--brand-primary);
   color: white;
-  box-shadow: 0 6px 0 var(--primary-dark), 0 10px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 0 var(--brand-primary-dark), 0 12px 20px rgba(99, 102, 241, 0.3);
   transform: translateY(0);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .btn-gamified:hover {
   filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--brand-primary-dark), 0 16px 25px rgba(99, 102, 241, 0.4);
 }
 
 .btn-gamified:active {
-  box-shadow: 0 0px 0 var(--primary-dark), 0 2px 4px rgba(0,0,0,0.1);
   transform: translateY(6px);
+  box-shadow: 0 0px 0 var(--brand-primary-dark), 0 4px 8px rgba(99, 102, 241, 0.2);
 }
 
-.btn-gamified.secondary {
-  background-color: #E2E8F0;
-  color: #475569;
-  box-shadow: 0 6px 0 #CBD5E1, 0 10px 15px rgba(0,0,0,0.05);
-}
-
-.btn-gamified.secondary:active {
-  box-shadow: 0 0px 0 #CBD5E1, 0 2px 4px rgba(0,0,0,0.05);
-  transform: translateY(6px);
-}
-
+/* Gamified Success Variant */
 .btn-gamified.success {
-  background-color: var(--success);
-  box-shadow: 0 6px 0 #059669, 0 10px 15px rgba(0,0,0,0.1);
+  background-color: #10B981;
+  box-shadow: 0 6px 0 #059669, 0 12px 20px rgba(16, 185, 129, 0.3);
 }
-
+.btn-gamified.success:hover {
+  box-shadow: 0 8px 0 #059669, 0 16px 25px rgba(16, 185, 129, 0.4);
+}
 .btn-gamified.success:active {
-  box-shadow: 0 0px 0 #059669, 0 2px 4px rgba(0,0,0,0.1);
-  transform: translateY(6px);
+  box-shadow: 0 0px 0 #059669, 0 4px 8px rgba(16, 185, 129, 0.2);
 }
 
-#root {
-  min-height: 100vh;
+/* Gamified Secondary (Glass) Variant */
+.btn-gamified.secondary {
+  background-color: var(--surface-glass);
+  backdrop-filter: blur(12px);
+  color: var(--brand-primary);
+  border: 2px solid var(--brand-primary-light);
+  box-shadow: 0 6px 0 var(--brand-primary-light), 0 12px 20px rgba(0, 0, 0, 0.05);
+}
+.btn-gamified.secondary:hover {
+  background-color: var(--surface-glass-solid);
+  box-shadow: 0 8px 0 var(--brand-primary-light), 0 16px 25px rgba(0, 0, 0, 0.1);
+}
+.btn-gamified.secondary:active {
+  box-shadow: 0 0px 0 var(--brand-primary-light), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+[data-theme='dark'] .btn-gamified.secondary {
+  color: white;
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 6px 0 rgba(255,255,255,0.2), 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+[data-theme='dark'] .btn-gamified.secondary:hover {
+  box-shadow: 0 8px 0 rgba(255,255,255,0.2), 0 16px 25px rgba(0, 0, 0, 0.3);
+}
+[data-theme='dark'] .btn-gamified.secondary:active {
+  box-shadow: 0 0px 0 transparent, 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  outline: none;
+/* Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-input,
-textarea,
-select {
-  font-family: inherit;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }

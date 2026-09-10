@@ -168,7 +168,7 @@ class SpeechRecognitionService {
       this._recognition.interimResults = false
       
       // Determine language code based on langId. We can use a basic map.
-      const langMap = { hi: 'hi-IN', ta: 'ta-IN', te: 'te-IN', en: 'en-IN', mr: 'mr-IN', bn: 'bn-IN', pa: 'pa-IN', gu: 'gu-IN' }
+      const langMap = { hi: 'hi-IN', ta: 'ta-IN', te: 'te-IN', en: 'en-IN', mr: 'mr-IN', bn: 'bn-IN', pa: 'pa-IN', gu: 'gu-IN', ml: 'ml-IN', kn: 'kn-IN' }
       this._recognition.lang = langMap[langId] || 'hi-IN'
 
       this._recognition.onstart = () => {

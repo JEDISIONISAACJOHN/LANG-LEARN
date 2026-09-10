@@ -235,6 +235,8 @@ export function AuthProvider({ children }) {
   const signup = async (name, email, password) => {
     const normalizedEmail = email.trim().toLowerCase()
 
+    // TEMPORARY BYPASS: Disabling Supabase auth to avoid email confirmation issues during testing
+    /*
     if (isSupabaseConfigured() && supabase) {
       const { data, error } = await supabase.auth.signUp({
         email: normalizedEmail,
@@ -257,6 +259,7 @@ export function AuthProvider({ children }) {
 
       return { name: name.trim(), email: normalizedEmail }
     }
+    */
 
     // Local fallback
     const users = getLocalRegisteredUsers()
@@ -294,6 +297,8 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const normalizedEmail = email.trim().toLowerCase()
 
+    // TEMPORARY BYPASS: Disabling Supabase auth to avoid configuration issues during testing
+    /*
     if (isSupabaseConfigured() && supabase) {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: normalizedEmail,
@@ -311,6 +316,7 @@ export function AuthProvider({ children }) {
         return userProfile
       }
     }
+    */
 
     // Local fallback
     const users = getLocalRegisteredUsers()
@@ -354,6 +360,9 @@ export function AuthProvider({ children }) {
 
   // Login with Google OAuth
   const loginWithGoogle = async () => {
+    // TEMPORARY BYPASS: Since Google OAuth is not configured in your Supabase Dashboard,
+    // we will directly use the local offline fallback profile so you can test the app immediately.
+    /*
     if (isSupabaseConfigured() && supabase) {
       try {
         const { data, error } = await supabase.auth.signInWithOAuth({
@@ -372,6 +381,7 @@ export function AuthProvider({ children }) {
         console.warn('Supabase Google OAuth error, falling back to local Google profile:', err)
       }
     }
+    */
 
     // Local / Offline fallback Google profile
     const users = getLocalRegisteredUsers()

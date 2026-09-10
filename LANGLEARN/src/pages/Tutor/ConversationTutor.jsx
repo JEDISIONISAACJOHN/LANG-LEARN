@@ -10,7 +10,7 @@ import { speakText } from '../../services/aiService'
 import { speechRecognitionService, REC_STATE } from '../../services/audio/SpeechRecognitionService'
 import { audioFX } from '../../utils/audioFX'
 import { triggerConfetti } from '../../utils/confetti'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import RightSidebar from '../../components/RightSidebar/RightSidebar'
 import Button from '../../components/Button'
 import { MessageSquare, Volume2, Mic, MicOff, Send, Sparkles, CheckCircle2, ChevronRight, BookOpen, Award, ArrowLeft } from 'lucide-react'
@@ -184,12 +184,12 @@ export default function ConversationTutor() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 font-sans">
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 font-sans">
       {/* 1. LEFT SIDEBAR */}
-      <AppSidebar />
+
 
       {/* 2. CENTER TUTOR CONVERSATION HUB */}
-      <main className="flex-1 max-w-[660px] md:ml-64 px-4 py-6 md:py-8 flex flex-col space-y-4 min-h-screen">
+      <main className="flex-1 max-w-[660px] px-4 py-6 md:py-8 flex flex-col space-y-4 min-h-screen">
         {/* Header Title Banner */}
         <div className="soft-card p-5 flex items-center justify-between">
           <div className="flex items-center gap-3">

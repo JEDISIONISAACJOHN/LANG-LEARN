@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../services/auth'
 import { supabase, isSupabaseConfigured } from '../../services/supabase'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import RightSidebar from '../../components/RightSidebar/RightSidebar'
 import { Trophy, Flame, Zap, ShieldCheck, Clock, ArrowUp, ArrowDown } from 'lucide-react'
 
@@ -93,10 +93,10 @@ export default function Leaderboard() {
   const userRank = user ? combinedList.findIndex((u) => u.id === user.id) + 1 : 1
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
-      <AppSidebar />
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
 
-      <main className="flex-1 max-w-[680px] md:ml-64 px-4 py-6 md:py-8 space-y-6">
+
+      <main className="flex-1 max-w-[680px] px-4 py-6 md:py-8 space-y-6">
         {/* League Selector Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {LEAGUES.map((league) => {

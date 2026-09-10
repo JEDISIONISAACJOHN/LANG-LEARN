@@ -40,7 +40,7 @@ export default function RightSidebar() {
   return (
     <aside className="w-80 hidden lg:flex flex-col space-y-5 shrink-0 py-6 pr-4">
       {/* 1. TOP HEADER STATUS BAR (Flag, Streak, XP, Gems, Hearts) */}
-      <div className="flex items-center justify-between gap-1.5 p-2 soft-card">
+      <div className="flex items-center justify-between gap-1.5 p-2 soft-card relative z-50">
         <LanguageDropdown />
         <StreakBadge streak={user?.streak || 0} />
         <XPBadge xp={user?.xp || 0} />
@@ -164,7 +164,7 @@ export default function RightSidebar() {
       {/* 4. LEADERBOARD LEAGUE PREVIEW */}
       <div
         onClick={() => navigate('/leaderboard')}
-        className="bg-gradient-to-br from-amber-500/10 via-white to-white dark:from-amber-900/20 dark:to-slate-900 rounded-3xl border border-amber-500/30 p-5 shadow-sm cursor-pointer hover:border-amber-500 transition-all group"
+        className="glass-panel rounded-3xl border border-amber-500/30 p-5 shadow-sm cursor-pointer hover:border-amber-500 transition-all group"
       >
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">

@@ -67,6 +67,8 @@ export default function Lesson() {
         goal: user.goal,
         ageRange: user.ageRange || 'adult',
         level: user.level || 'beginner',
+        learningStyle: user.learningStyle,
+        interests: user.interests,
         preferredLangId: preferredLang,
       })
 
@@ -90,6 +92,8 @@ export default function Lesson() {
           goal: user.goal,
           ageRange: user.ageRange || 'adult',
           level: user.level || 'beginner',
+          learningStyle: user.learningStyle,
+          interests: user.interests,
           count: 15,
         })
       } catch {
@@ -248,24 +252,24 @@ export default function Lesson() {
 
       case 'multiple-choice':
         return (
-          <div className="space-y-4">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-6">
+          <div className="space-y-6">
+            <h3 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight mb-10 leading-tight">
               {exercise.prompt}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {exercise.options.map((option, index) => (
                 <motion.button
                   key={index}
                   type="button"
                   className={`
-                    p-5 rounded-2xl border-2 border-b-4 text-left font-bold text-base transition-all select-none
+                    p-6 md:p-8 rounded-[2rem] border-2 text-left font-bold text-xl md:text-2xl transition-all select-none shadow-lg backdrop-blur-xl
                     ${selectedAnswer === option
                       ? showResult
                         ? option === exercise.correctAnswer
-                          ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 translate-y-[2px] border-b-2'
-                          : 'border-rose-500 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 translate-y-[2px] border-b-2'
-                        : 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 translate-y-[2px] border-b-2 shadow-sm'
-                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-slate-50 dark:hover:bg-slate-800/80 text-slate-800 dark:text-slate-100 active:translate-y-[2px] active:border-b-2'
+                          ? 'border-success/50 bg-success/20 text-success shadow-[0_0_20px_rgba(34,197,94,0.3)] translate-y-[2px] ring-4 ring-success/20'
+                          : 'border-error/50 bg-error/20 text-error shadow-[0_0_20px_rgba(244,63,94,0.3)] translate-y-[2px] ring-4 ring-error/20'
+                        : 'border-primary/50 bg-primary/20 text-primary shadow-[0_0_20px_rgba(99,102,241,0.3)] translate-y-[2px] ring-4 ring-primary/20'
+                      : 'border-border-subtle bg-surface hover:border-primary/50 hover:bg-surface-hover text-text-primary active:translate-y-[2px]'
                     }
                     ${showResult || hearts === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}
                   `}
@@ -296,23 +300,24 @@ export default function Lesson() {
           )
         }
         return (
-          <div className="space-y-4">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-6">
+          <div className="space-y-6">
+            <h3 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight mb-10 leading-tight">
               {exercise.prompt}
             </h3>
             <input
               type="text"
               value={selectedAnswer}
               onChange={(e) => setSelectedAnswer(e.target.value)}
-              className="w-full px-5 py-4 border-2 border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 dark:text-white font-medium text-lg"
+              className="w-full px-6 py-5 border-2 border-border-subtle rounded-[2rem] bg-surface focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary/50 text-text-primary font-bold text-xl md:text-2xl shadow-inner placeholder:text-text-secondary/50"
               placeholder="Type your answer..."
               disabled={showResult || hearts === 0}
             />
             {!showResult && (
-              <div className="flex justify-end pt-2">
+              <div className="flex justify-end pt-4">
                 <Button
                   onClick={() => handleAnswer(selectedAnswer)}
                   disabled={!selectedAnswer.trim() || showResult || hearts === 0}
+                  size="large"
                 >
                   Check Answer
                 </Button>
@@ -362,25 +367,25 @@ export default function Lesson() {
 
       case 'fill-blank':
         return (
-          <div className="space-y-4">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-6">
+          <div className="space-y-6">
+            <h3 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight mb-10 leading-tight">
               {exercise.prompt}
             </h3>
             {exercise.options && exercise.options.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-2 gap-4">
                 {exercise.options.map((option, index) => (
                   <motion.button
                     key={index}
                     type="button"
                     className={`
-                      p-5 rounded-2xl border-2 text-left font-bold text-base transition-all select-none
+                      p-6 md:p-8 rounded-[2rem] border-2 text-left font-bold text-xl md:text-2xl transition-all select-none shadow-lg backdrop-blur-xl
                       ${selectedAnswer === option
                         ? showResult
                           ? option === exercise.correctAnswer
-                            ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 shadow-sm'
-                            : 'border-rose-500 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300'
-                          : 'border-indigo-500 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 ring-2 ring-indigo-200 dark:ring-indigo-800 shadow-sm'
-                        : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 dark:hover:border-indigo-700 text-slate-800 dark:text-slate-100'
+                            ? 'border-success/50 bg-success/20 text-success shadow-[0_0_20px_rgba(34,197,94,0.3)] ring-4 ring-success/20'
+                            : 'border-error/50 bg-error/20 text-error shadow-[0_0_20px_rgba(244,63,94,0.3)] ring-4 ring-error/20'
+                          : 'border-primary/50 bg-primary/20 text-primary ring-4 ring-primary/20 shadow-sm'
+                        : 'border-border-subtle bg-surface hover:border-primary/50 hover:bg-surface-hover text-text-primary'
                       }
                       ${showResult || hearts === 0 ? 'cursor-not-allowed' : 'cursor-pointer'}
                     `}
@@ -399,15 +404,16 @@ export default function Lesson() {
                   type="text"
                   value={selectedAnswer}
                   onChange={(e) => setSelectedAnswer(e.target.value)}
-                  className="w-full px-5 py-4 border-2 border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800 dark:text-white font-medium text-lg"
+                  className="w-full px-6 py-5 border-2 border-border-subtle rounded-[2rem] bg-surface focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary/50 text-text-primary font-bold text-xl md:text-2xl shadow-inner placeholder:text-text-secondary/50"
                   placeholder="Type your answer..."
                   disabled={showResult || hearts === 0}
                 />
                 {!showResult && (
-                  <div className="flex justify-end pt-2">
+                  <div className="flex justify-end pt-4">
                     <Button
                       onClick={() => handleAnswer(selectedAnswer)}
                       disabled={!selectedAnswer.trim() || showResult || hearts === 0}
+                      size="large"
                     >
                       Check Answer
                     </Button>
@@ -442,24 +448,24 @@ export default function Lesson() {
     const exercise = lesson.exercises[currentExercise]
 
     return (
-      <div className={`p-4 rounded-2xl border mt-6 text-center transition-all ${
+      <div className={`p-6 rounded-[2rem] border-2 mt-8 text-center transition-all shadow-xl backdrop-blur-md ${
         isCorrect 
-          ? 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-200' 
-          : 'bg-rose-50/80 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800/40 text-rose-800 dark:text-rose-200'
+          ? 'bg-success/10 border-success/30 text-success' 
+          : 'bg-error/10 border-error/30 text-error'
       }`}>
-        <div className="flex items-center justify-center gap-2 mb-1">
+        <div className="flex items-center justify-center gap-3 mb-2">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className={`text-xl font-black ${isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}
+            className="text-2xl font-black"
           >
             {isCorrect ? '✓ Excellent!' : '✗ Not quite right'}
           </motion.div>
         </div>
 
         {!isCorrect && (
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1">
-            Correct answer: <span className="font-black text-slate-800 dark:text-white">{exercise.correctAnswer}</span>
+          <p className="text-sm font-semibold text-text-secondary mt-2">
+            Correct answer: <span className="font-black text-text-primary text-base">{exercise.correctAnswer}</span>
           </p>
         )}
 
@@ -467,8 +473,9 @@ export default function Lesson() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-amber-500 dark:text-amber-400 font-black text-xs mt-1"
+            className="text-accent-primary font-black text-sm mt-2 flex items-center justify-center gap-1"
           >
+            <Sparkles className="w-4 h-4" />
             +{exercise.xp || 10} XP
           </motion.div>
         )}
@@ -478,7 +485,7 @@ export default function Lesson() {
 
   if (!lesson) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent flex items-center justify-center">
         <p className="text-slate-400 font-bold">Loading lesson...</p>
       </div>
     )
@@ -486,7 +493,7 @@ export default function Lesson() {
 
   if (hearts === 0 && !lessonComplete) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <QuestionCard>
             <div className="text-center py-6">
@@ -513,7 +520,7 @@ export default function Lesson() {
     const accuracy = Math.round((correctCount / Math.max(1, lesson.exercises.length)) * 100)
 
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <QuestionCard>
             <CelebrationModal
@@ -533,7 +540,7 @@ export default function Lesson() {
   }
 
   return (
-    <div className={`min-h-screen ${isLegendary ? 'bg-amber-950/20 dark:bg-amber-950/40' : 'bg-slate-50 dark:bg-slate-950'} flex flex-col justify-between p-4 md:p-8`}>
+    <div className={`min-h-screen ${isLegendary ? 'bg-amber-950/20 dark:bg-amber-950/40' : 'bg-transparent'} flex flex-col justify-between p-4 md:p-8`}>
       {/* Top Navigation */}
       <div className="w-full max-w-2xl mx-auto">
         {isLegendary && (

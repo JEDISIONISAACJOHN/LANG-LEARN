@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../services/auth'
+import { useAppSound } from '../../services/sound'
 import LangLearnLogo from '../../components/Logo/LangLearnLogo'
+import { Sparkles, ArrowRight } from 'lucide-react'
 
 export default function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const { login, loginWithGoogle } = useAuth()
+  const { playClick, playSuccess, playError } = useAppSound()
   
   const successMessage = location.state?.successMessage
   const prefillEmail = location.state?.email || ''
@@ -43,11 +46,14 @@ export default function Login() {
   }
 
   const handleGoogleLogin = async () => {
+    playClick()
     setLoading(true)
     try {
       await loginWithGoogle()
+      playSuccess()
       navigate('/dashboard')
     } catch (error) {
+      playError()
       setErrors({ general: error.message || 'Google sign-in failed' })
     } finally {
       setLoading(false)
@@ -56,14 +62,20 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    playClick()
     
-    if (!validate()) return
+    if (!validate()) {
+      playError()
+      return
+    }
     
     setLoading(true)
     try {
       await login(formData.email, formData.password)
+      playSuccess()
       navigate('/dashboard')
     } catch (error) {
+      playError()
       setErrors({ general: error.message || 'Invalid email or password' })
     } finally {
       setLoading(false)
@@ -84,40 +96,86 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center p-4">
-      <motion.div
-        className="w-full max-w-md"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      >
-        <div className="soft-card p-8">
-          <div className="text-center mb-6">
-            <div className="flex justify-center mb-3">
-              <LangLearnLogo size="medium" />
+    <div className="min-h-screen bg-background flex">
+      {/* Left side - Visual/Branding (Hidden on mobile) */}
+      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-primary to-accent-primary p-12 flex-col justify-between relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-white opacity-5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] h-[30rem] bg-accent-secondary opacity-10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="bg-white p-2 rounded-2xl">
+              <LangLearnLogo size="small" />
             </div>
-            <h1 className="text-2xl font-black text-slate-800 dark:text-white mb-1">Welcome back</h1>
-            <p className="text-sm text-slate-500">Log in to continue your Indian language learning</p>
+            <span className="text-white text-2xl font-black tracking-tight">LangLearn</span>
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-bold uppercase tracking-wider backdrop-blur-md mb-6 border border-white/20">
+              <Sparkles size={16} /> The AI Way to Learn
+            </div>
+            <h1 className="text-5xl xl:text-6xl font-black text-white leading-tight mb-6">
+              Master Indian Languages Faster.
+            </h1>
+            <p className="text-white/80 text-xl font-medium max-w-md">
+              Join the future of language learning with hyper-personalized AI tutors and interactive stories.
+            </p>
+          </motion.div>
+        </div>
+        
+        <div className="relative z-10 bg-white/10 p-6 rounded-3xl backdrop-blur-md border border-white/20 max-w-sm">
+          <p className="text-white font-medium italic">"LangLearn completely changed how I connect with my family's heritage. The AI tutor feels like a real person."</p>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-accent-secondary flex items-center justify-center text-white font-bold">R</div>
+            <div>
+              <p className="text-white font-bold text-sm">Rahul S.</p>
+              <p className="text-white/70 text-xs">Learning Hindi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right side - Login Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12">
+        <motion.div
+          className="w-full max-w-md"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+        >
+          {/* Mobile Logo */}
+          <div className="flex lg:hidden items-center justify-center gap-3 mb-10">
+            <LangLearnLogo size="small" />
+            <span className="text-text-primary text-3xl font-black tracking-tight">LangLearn</span>
+          </div>
+
+          <div className="text-center lg:text-left mb-10">
+            <h2 className="text-4xl font-black text-text-primary mb-3">Welcome Back</h2>
+            <p className="text-text-secondary text-lg font-medium">Log in to continue your journey</p>
           </div>
 
           {successMessage && (
-            <div className="mb-4 p-3 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl text-indigo-700 dark:text-indigo-400 text-sm flex items-start gap-2">
-              <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-              </svg>
+            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} className="mb-6 p-4 bg-success/10 border border-success/20 rounded-[1rem] text-success text-sm font-medium flex items-center gap-3">
+              <Sparkles size={18} />
               <span>{successMessage}</span>
-            </div>
+            </motion.div>
           )}
 
           {errors.general && (
-            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-red-600 dark:text-red-400 text-sm">
+            <motion.div initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }} className="mb-6 p-4 bg-error/10 border border-error/20 rounded-[1rem] text-error text-sm font-medium flex items-center gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-error"></div>
               {errors.general}
-            </div>
+            </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-1">
+              <label htmlFor="email" className="block text-sm font-bold text-text-primary uppercase tracking-wider ml-1">
                 Email
               </label>
               <input
@@ -126,63 +184,60 @@ export default function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.email ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.email ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
-                placeholder="Enter your email"
+                placeholder="hello@example.com"
               />
-              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+              {errors.email && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.email}</p>}
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Password
-              </label>
+            <div className="space-y-1">
+              <div className="flex items-center justify-between ml-1">
+                <label htmlFor="password" className="block text-sm font-bold text-text-primary uppercase tracking-wider">
+                  Password
+                </label>
+                <button type="button" onClick={() => playClick()} className="text-sm font-bold text-primary hover:text-accent-secondary transition-colors">
+                  Forgot?
+                </button>
+              </div>
               <input
                 type="password"
                 id="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors ${
-                  errors.password ? 'border-red-300 dark:border-red-700' : 'border-slate-200 dark:border-slate-700'
+                className={`w-full px-5 py-4 bg-surface-hover border-2 rounded-[1.25rem] focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all font-medium text-text-primary placeholder:text-text-muted ${
+                  errors.password ? 'border-error' : 'border-border-subtle focus:border-primary'
                 }`}
-                placeholder="Enter your password"
+                placeholder="••••••••"
               />
-              {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="w-4 h-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500" />
-                <span className="ml-2 text-sm text-slate-500 dark:text-slate-400">Remember me</span>
-              </label>
-              <button type="button" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">
-                Forgot password?
-              </button>
+              {errors.password && <p className="mt-1 text-sm text-error font-medium ml-1">{errors.password}</p>}
             </div>
 
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold shadow-md shadow-indigo-200 dark:shadow-none transition-all active:scale-95 disabled:opacity-70"
+              className="w-full btn-gamified text-white"
             >
-              {loading ? 'Logging in...' : 'Log in'}
+              {loading ? 'Logging in...' : (
+                <>Log In <ArrowRight size={20} /></>
+              )}
             </button>
 
-            <div className="relative my-6">
+            <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200 dark:border-slate-700" />
+                <div className="w-full border-t border-border-subtle" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-3 bg-white dark:bg-slate-900 text-slate-500">Or continue with</span>
+              <div className="relative flex justify-center text-sm font-bold uppercase tracking-widest">
+                <span className="px-4 bg-background text-text-muted">Or</span>
               </div>
             </div>
 
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full py-3 px-4 flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95"
+              className="w-full py-4 px-6 flex items-center justify-center gap-3 bg-surface hover:bg-surface-hover border-2 border-border-subtle text-text-primary rounded-[1.25rem] font-black transition-all active:scale-[0.98]"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -194,14 +249,14 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-8 text-center text-text-secondary font-medium">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">
+            <Link to="/signup" onClick={() => playClick()} className="text-primary font-black hover:text-accent-primary transition-colors">
               Sign up
             </Link>
           </p>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   )
 }

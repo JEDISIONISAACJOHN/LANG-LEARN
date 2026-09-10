@@ -10,25 +10,28 @@ export default function QuestionCard({
   return (
     <motion.div
       className={`
-        soft-card p-6 md:p-10 relative overflow-hidden transition-all
-        ${showResult ? (isCorrect ? 'ring-2 ring-emerald-400/80 dark:ring-emerald-500/80' : 'ring-2 ring-rose-400/80 dark:ring-rose-500/80') : ''}
+        p-6 sm:p-8 md:p-12 bg-surface/80 backdrop-blur-xl border-2 border-border-subtle shadow-2xl rounded-[2.5rem] relative overflow-hidden transition-all
+        ${showResult ? (isCorrect ? 'border-success/50 ring-4 ring-success/20' : 'border-error/50 ring-4 ring-error/20') : ''}
         ${className}
       `}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
     >
+      {/* Inner highlight */}
+      <div className="absolute inset-0 border-t border-white/5 pointer-events-none rounded-[2.5rem]"></div>
+      
       {showResult && (
         <motion.div
           className={`
-            flex items-center justify-center w-12 h-12 rounded-2xl mb-5 shadow-sm
-            ${isCorrect ? 'bg-emerald-500 text-white shadow-emerald-500/30' : 'bg-rose-500 text-white shadow-rose-500/30'}
+            flex items-center justify-center w-14 h-14 rounded-2xl mb-8 shadow-sm
+            ${isCorrect ? 'bg-success text-white shadow-success/30' : 'bg-error text-white shadow-error/30'}
           `}
           initial={{ scale: 0, rotate: -20 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 400, damping: 20 }}
         >
-          {isCorrect ? <Check className="text-white" size={24} strokeWidth={3} /> : <X className="text-white" size={24} strokeWidth={3} />}
+          {isCorrect ? <Check className="text-white" size={28} strokeWidth={3} /> : <X className="text-white" size={28} strokeWidth={3} />}
         </motion.div>
       )}
       

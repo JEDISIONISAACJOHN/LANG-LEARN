@@ -4,7 +4,7 @@ import { useAuth } from '../../services/auth'
 import { useProgress } from '../../services/progress'
 import { getStoryById } from '../../data/stories'
 import { AudioService } from '../../services/audio/AudioService'
-import { ArrowLeft, Volume2, Sparkles, CheckCircle2, XCircle, Trophy, Award } from 'lucide-react'
+import { ArrowLeft, Volume2, Sparkles, CheckCircle2, XCircle, Trophy, BookOpen } from 'lucide-react'
 
 export default function StoryReader() {
   const { storyId } = useParams()
@@ -22,7 +22,7 @@ export default function StoryReader() {
 
   if (!story) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-transparent text-slate-900 dark:text-slate-100">
         <h2 className="text-xl font-bold mb-4">Story not found</h2>
         <button
           onClick={() => navigate('/stories')}
@@ -56,7 +56,6 @@ export default function StoryReader() {
         playAudio(nextSeg.audioText)
       }
     } else {
-      // Completed the story!
       handleComplete()
     }
   }
@@ -89,7 +88,7 @@ export default function StoryReader() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 flex flex-col">
       {/* Top Navigation */}
       <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3.5">
         <div className="max-w-2xl mx-auto flex items-center justify-between gap-4">
@@ -198,19 +197,27 @@ export default function StoryReader() {
                 )}
               </div>
             ) : (
-              /* REGULAR DIALOGUE CARD */
-              <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-300">
+              /* REGULAR NARRATIVE/DIALOGUE CARD */
+              <div className="bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-xl animate-in fade-in slide-in-from-bottom-4 duration-300">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl p-2 rounded-2xl bg-amber-50 dark:bg-amber-950/50 shadow-inner">
-                      {currentSegment.avatar || '👤'}
-                    </span>
-                    <div>
-                      <h4 className="font-bold text-sm text-slate-800 dark:text-slate-200">
-                        {currentSegment.speaker}
-                      </h4>
-                      <span className="text-[11px] text-slate-400">Speaker</span>
-                    </div>
+                    {currentSegment.speaker ? (
+                      <>
+                        <span className="text-3xl p-2 rounded-2xl bg-amber-50 dark:bg-amber-950/50 shadow-inner">
+                          {currentSegment.avatar || '👤'}
+                        </span>
+                        <div>
+                          <h4 className="font-bold text-sm text-slate-800 dark:text-slate-200">
+                            {currentSegment.speaker}
+                          </h4>
+                          <span className="text-[11px] text-slate-400 uppercase tracking-widest font-bold">Speaker</span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest text-xs bg-indigo-50 dark:bg-indigo-950/50 px-3 py-1.5 rounded-full">
+                        <BookOpen className="w-4 h-4" /> Story Narrative
+                      </div>
+                    )}
                   </div>
 
                   {currentSegment.audioText && (
@@ -224,13 +231,13 @@ export default function StoryReader() {
                   )}
                 </div>
 
-                {/* Main Native Dialogue */}
-                <div className="my-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800">
-                  <p className="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-relaxed tracking-wide">
+                {/* Main Native Dialogue/Narrative */}
+                <div className="my-6 p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 shadow-inner">
+                  <p className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white leading-[1.4] tracking-tight">
                     {currentSegment.text}
                   </p>
                   {currentSegment.pronunciation && (
-                    <p className="text-xs md:text-sm font-medium text-amber-600 dark:text-amber-400 mt-2 italic">
+                    <p className="text-sm md:text-base font-bold text-amber-600 dark:text-amber-400 mt-4 italic tracking-wide">
                       "{currentSegment.pronunciation}"
                     </p>
                   )}
@@ -238,9 +245,11 @@ export default function StoryReader() {
 
                 {/* English translation */}
                 {showTranslation && currentSegment.translation && (
-                  <p className="text-sm font-medium text-slate-600 dark:text-slate-300 border-l-2 border-amber-500 pl-3">
-                    {currentSegment.translation}
-                  </p>
+                  <div className="mt-4 p-5 rounded-3xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50">
+                    <p className="text-base md:text-lg font-bold text-slate-700 dark:text-slate-300">
+                      {currentSegment.translation}
+                    </p>
+                  </div>
                 )}
               </div>
             )}
@@ -280,7 +289,7 @@ export default function StoryReader() {
               Story Complete!
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm mx-auto mb-8">
-              You finished <span className="font-bold text-amber-600 dark:text-amber-400">"{story.title}"</span> and tested your comprehension.
+              You finished <span className="font-bold text-amber-600 dark:text-amber-400">"{story.title}"</span>. Great job!
             </p>
 
             {/* Rewards */}

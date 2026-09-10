@@ -193,6 +193,10 @@ class TTSService {
     }
     this._audioElement = null
     
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+    }
+    
     if (
       this._currentState === AUDIO_STATE.PLAYING ||
       this._currentState === AUDIO_STATE.LOADING

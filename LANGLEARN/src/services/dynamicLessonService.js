@@ -28,9 +28,9 @@ async function apiFetch(path, options = {}) {
  * Fetch dynamic lessons from the server.
  * Falls back to static local lessons if server is unreachable.
  */
-export async function fetchDynamicLessons({ languageId, goal, ageRange = 'adult', level = 'beginner', count = 10 }) {
+export async function fetchDynamicLessons({ languageId, goal, ageRange = 'adult', level = 'beginner', learningStyle = 'balanced', interests = 'culture', count = 10 }) {
   try {
-    const params = new URLSearchParams({ languageId, goal, ageRange, level, count })
+    const params = new URLSearchParams({ languageId, goal, ageRange, level, learningStyle, interests, count })
     const data = await apiFetch(`/lessons/dynamic?${params}`)
     return data.lessons || []
   } catch (err) {
@@ -43,9 +43,9 @@ export async function fetchDynamicLessons({ languageId, goal, ageRange = 'adult'
  * Fetch a single dynamic lesson by its sequential index.
  * Falls back to static lesson if server unavailable.
  */
-export async function fetchDynamicLesson({ languageId, goal, ageRange = 'adult', level = 'beginner', lessonIndex = 0 }) {
+export async function fetchDynamicLesson({ languageId, goal, ageRange = 'adult', level = 'beginner', learningStyle = 'balanced', interests = 'culture', lessonIndex = 0 }) {
   try {
-    const params = new URLSearchParams({ languageId, goal, ageRange, level })
+    const params = new URLSearchParams({ languageId, goal, ageRange, level, learningStyle, interests })
     const data = await apiFetch(`/lessons/dynamic/${lessonIndex}?${params}`)
     return data
   } catch (err) {
@@ -59,12 +59,13 @@ export async function fetchDynamicLesson({ languageId, goal, ageRange = 'adult',
  * Fetch a lesson by ID — dynamic lessons have IDs like "hi-dynamic-0".
  * Static lessons use their original IDs.
  */
-export async function fetchLessonById({ languageId, lessonId, goal, ageRange = 'adult', level = 'beginner', preferredLangId = 'en' }) {
+export async function fetchLessonById({ languageId, lessonId, goal, ageRange = 'adult', level = 'beginner', learningStyle = 'balanced', interests = 'culture', preferredLangId = 'en' }) {
   // Dynamic lesson ID pattern: {lang}-dynamic-{index}
   const dynamicMatch = lessonId?.match(/^(\w+)-dynamic-(\d+)$/)
   if (dynamicMatch) {
+    const parsedLangId = dynamicMatch[1]
     const lessonIndex = parseInt(dynamicMatch[2], 10)
-    return fetchDynamicLesson({ languageId, goal, ageRange, level, lessonIndex })
+    return fetchDynamicLesson({ languageId: parsedLangId, goal, ageRange, level, learningStyle, interests, lessonIndex })
   }
   // Static lesson
   return getStaticLessonById(languageId, lessonId, preferredLangId)
@@ -75,11 +76,11 @@ export async function fetchLessonById({ languageId, lessonId, goal, ageRange = '
  * Returns a plan object with focusAreas, startingLevel, etc.
  * Never exposes AI provider names.
  */
-export async function generatePersonalizedPlan({ languageId, ageRange, goal, level, assessmentScore, dailyGoal }) {
+export async function generatePersonalizedPlan({ languageId, ageRange, goal, level, assessmentScore, dailyGoal, learningStyle = 'balanced', interests = 'culture' }) {
   try {
     const data = await apiFetch('/learning-plan', {
       method: 'POST',
-      body: JSON.stringify({ languageId, ageRange, goal, level, assessmentScore, dailyGoal }),
+      body: JSON.stringify({ languageId, ageRange, goal, level, assessmentScore, dailyGoal, learningStyle, interests }),
     })
     return data
   } catch (err) {
@@ -92,9 +93,9 @@ export async function generatePersonalizedPlan({ languageId, ageRange, goal, lev
  * Fetch dynamic assessment questions for initial placement.
  * Falls back to static questions if server unavailable.
  */
-export async function fetchAssessmentQuestions({ languageId, ageRange = 'adult', goal = 'conversation', count = 6 }) {
+export async function fetchAssessmentQuestions({ languageId, ageRange = 'adult', goal = 'conversation', learningStyle = 'balanced', interests = 'culture', count = 6 }) {
   try {
-    const params = new URLSearchParams({ languageId, ageRange, goal, count })
+    const params = new URLSearchParams({ languageId, ageRange, goal, learningStyle, interests, count })
     const data = await apiFetch(`/assessment/questions?${params}`)
     return data.questions || []
   } catch (err) {

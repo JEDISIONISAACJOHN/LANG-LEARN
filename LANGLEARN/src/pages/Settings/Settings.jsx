@@ -5,7 +5,7 @@ import { useAuth } from '../../services/auth'
 import { useTheme } from '../../services/themeContext'
 import { languages } from '../../data/languages'
 import { API_CATALOGUE } from '../../services/freeLanguageApi'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import LanguageFlag from '../../components/LanguageFlag/LanguageFlag'
 import Button from '../../components/Button'
 import { Sun, Moon, Sparkles, Leaf, Globe2, Check, Volume2, VolumeX, Mic, MicOff, Shield, Sliders } from 'lucide-react'
@@ -98,12 +98,12 @@ export default function Settings() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 font-sans">
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 font-sans">
       {/* 1. LEFT SIDEBAR */}
-      <AppSidebar />
+
 
       {/* 2. CENTER SETTINGS CONTENT */}
-      <main className="flex-1 max-w-[720px] md:ml-64 px-4 py-6 md:py-8 space-y-6">
+      <main className="flex-1 max-w-[720px] px-4 py-6 md:py-8 space-y-6">
         {/* Header Title */}
         <div className="soft-card p-6 flex items-center justify-between">
           <div className="flex items-center gap-3.5">

@@ -1,8 +1,1 @@
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-bounce {
-  animation: float 2s ease-in-out infinite;
-}
+/* Welcome page specific styles are now globally managed in index.css */

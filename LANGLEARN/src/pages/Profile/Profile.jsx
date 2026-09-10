@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../services/auth'
 import { achievements } from '../../data/achievements'
 import { getLanguageById } from '../../data/languages'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import RightSidebar from '../../components/RightSidebar/RightSidebar'
 import Button from '../../components/Button'
 import { Award, Flame, Zap, BookOpen, Calendar, Target } from 'lucide-react'
@@ -31,12 +31,12 @@ export default function Profile() {
     : []
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 font-sans">
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 font-sans">
       {/* 1. LEFT SIDEBAR */}
-      <AppSidebar />
+
 
       {/* 2. CENTER PROFILE CONTENT */}
-      <main className="flex-1 max-w-[620px] md:ml-64 px-4 py-6 md:py-8 space-y-6">
+      <main className="flex-1 max-w-[620px] px-4 py-6 md:py-8 space-y-6">
         {/* User Card */}
         <div className="soft-card p-6 md:p-8">
           <div className="flex items-center gap-5 mb-6">

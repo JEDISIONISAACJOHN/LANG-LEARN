@@ -109,6 +109,105 @@ const VOCABULARY_BANKS = {
       { word: 'எங்கே', translation: 'Where', pronunciation: 'engae', example: 'சந்தை எங்கே இருக்கிறது?' },
     ],
   },
+  ml: {
+    greetings: [
+      { word: 'നമസ്കാരം', translation: 'Hello / Greetings', pronunciation: 'namaskaram', example: 'നമസ്കാരം, സുഖമാണോ?' },
+      { word: 'നന്ദി', translation: 'Thank you', pronunciation: 'nandi', example: 'നിങ്ങളുടെ സഹായത്തിന് നന്ദി' },
+      { word: 'ദയവായി', translation: 'Please', pronunciation: 'dayavayi', example: 'ദയവായി ഇരിക്കൂ' },
+      { word: 'വിട', translation: 'Goodbye', pronunciation: 'vida', example: 'പിന്നെ കാണാം, വിട' },
+      { word: 'സുപ്രഭാതം', translation: 'Good morning', pronunciation: 'suprabhatham', example: 'സുപ്രഭാതം കൂട്ടുകാരാ' },
+      { word: 'ക്ഷമിക്കണം', translation: 'Sorry / Excuse me', pronunciation: 'kshamikanam', example: 'ക്ഷമിക്കണം, എനിക്ക് വൈകി' },
+    ],
+    travel: [
+      { word: 'ട്രെയിൻ', translation: 'Train', pronunciation: 'train', example: 'ട്രെയിൻ എപ്പോഴാണ് വരുന്നത്?' },
+      { word: 'ബസ്', translation: 'Bus', pronunciation: 'bus', example: 'ബസ് സ്റ്റാൻഡ് എവിടെയാണ്?' },
+      { word: 'ഹോട്ടൽ', translation: 'Hotel', pronunciation: 'hotel', example: 'ഹോട്ടൽ എവിടെയാണ്?' },
+      { word: 'വലത്ത്', translation: 'Right', pronunciation: 'valathu', example: 'വലത്തോട്ട് തിരിയുക' },
+      { word: 'ഇടത്ത്', translation: 'Left', pronunciation: 'idathu', example: 'ഇടത്തോട്ട് തിരിയുക' },
+      { word: 'എത്ര', translation: 'How much', pronunciation: 'ethra', example: 'ഇതിന് എത്രയാകും?' },
+    ],
+    food: [
+      { word: 'വെള്ളം', translation: 'Water', pronunciation: 'vellam', example: 'കുറച്ചു വെള്ളം തരുമോ?' },
+      { word: 'ഭക്ഷണം', translation: 'Food', pronunciation: 'bhakshanam', example: 'ഭക്ഷണം വളരെ നല്ലതാണ്' },
+      { word: 'ചായ', translation: 'Tea', pronunciation: 'chaya', example: 'ഒരു ചായ എടുക്കട്ടെ' },
+      { word: 'ചോറ്', translation: 'Rice', pronunciation: 'choru', example: 'ചോറും കറിയും' },
+      { word: 'മധുരം', translation: 'Sweet', pronunciation: 'madhuram', example: 'എനിക്ക് മധുരം ഇഷ്ടമാണ്' },
+    ],
+    conversation: [
+      { word: 'നിങ്ങൾ', translation: 'You (formal)', pronunciation: 'ningal', example: 'നിങ്ങൾക്ക് സുഖമാണോ?' },
+      { word: 'ഞാൻ', translation: 'I / Me', pronunciation: 'njan', example: 'ഞാൻ സുഖമായിരിക്കുന്നു' },
+      { word: 'അതെ', translation: 'Yes', pronunciation: 'athe', example: 'അതെ, തീർച്ചയായും' },
+      { word: 'ഇല്ല', translation: 'No', pronunciation: 'illa', example: 'ഇല്ല, നന്ദി' },
+      { word: 'എന്ത്', translation: 'What', pronunciation: 'enthu', example: 'നിങ്ങൾക്ക് എന്ത് വേണം?' },
+      { word: 'എവിടെ', translation: 'Where', pronunciation: 'evide', example: 'മാർക്കറ്റ് എവിടെയാണ്?' },
+    ],
+  },
+  te: {
+    greetings: [
+      { word: 'నమస్కారం', translation: 'Hello / Greetings', pronunciation: 'namaskaram', example: 'నమస్కారం, మీరు ఎలా ఉన్నారు?' },
+      { word: 'ధన్యవాదాలు', translation: 'Thank you', pronunciation: 'dhanyavadalu', example: 'చాలా ధన్యవాదాలు' },
+      { word: 'దయచేసి', translation: 'Please', pronunciation: 'dayachesi', example: 'దయచేసి కూర్చోండి' },
+      { word: 'వెళ్లి వస్తాను', translation: 'Goodbye', pronunciation: 'velli vastanu', example: 'మళ్ళీ కలుద్దాం, వెళ్లి వస్తాను' },
+      { word: 'శుభోదయం', translation: 'Good morning', pronunciation: 'shubhodayam', example: 'శుభోదయం!' },
+      { word: 'క్షమించండి', translation: 'Sorry / Excuse me', pronunciation: 'kshamincandi', example: 'క్షమించండి, ఆలస్యమైంది' },
+    ],
+    travel: [
+      { word: 'రైలు', translation: 'Train', pronunciation: 'railu', example: 'రైలు ఎప్పుడు వస్తుంది?' },
+      { word: 'బస్సు', translation: 'Bus', pronunciation: 'bassu', example: 'బస్సు స్టాండ్ ఎక్కడ ఉంది?' },
+      { word: 'హోటల్', translation: 'Hotel', pronunciation: 'hotel', example: 'హోటల్ ఎక్కడ ఉంది?' },
+      { word: 'కుడి', translation: 'Right', pronunciation: 'kudi', example: 'కుడి వైపుకు తిరగండి' },
+      { word: 'ఎడమ', translation: 'Left', pronunciation: 'edama', example: 'ఎడమ వైపుకు వెళ్ళండి' },
+      { word: 'ఎంత', translation: 'How much', pronunciation: 'entha', example: 'దీని ధర ఎంత?' },
+    ],
+    food: [
+      { word: 'నీరు', translation: 'Water', pronunciation: 'neeru', example: 'కొంచెం నీరు ఇవ్వండి' },
+      { word: 'ఆహారం', translation: 'Food', pronunciation: 'aharam', example: 'ఆహారం చాలా బాగుంది' },
+      { word: 'టీ', translation: 'Tea', pronunciation: 'tea', example: 'ఒక టీ ఇవ్వండి' },
+      { word: 'అన్నం', translation: 'Rice', pronunciation: 'annam', example: 'అన్నం మరియు పప్పు' },
+      { word: 'తీపి', translation: 'Sweet', pronunciation: 'teepi', example: 'నాకు తీపి అంటే ఇష్టం' },
+    ],
+    conversation: [
+      { word: 'మీరు', translation: 'You (formal)', pronunciation: 'meeru', example: 'మీరు ఎలా ఉన్నారు?' },
+      { word: 'నేను', translation: 'I / Me', pronunciation: 'nenu', example: 'నేను బాగున్నాను' },
+      { word: 'అవును', translation: 'Yes', pronunciation: 'avunu', example: 'అవును, తప్పకుండా' },
+      { word: 'కాదు', translation: 'No', pronunciation: 'kaadu', example: 'కాదు, ధన్యవాదాలు' },
+      { word: 'ఏమిటి', translation: 'What', pronunciation: 'emiti', example: 'మీకు ఏమి కావాలి?' },
+      { word: 'ఎక్కడ', translation: 'Where', pronunciation: 'ekkada', example: 'మార్కెట్ ఎక్కడ ఉంది?' },
+    ],
+  },
+  kn: {
+    greetings: [
+      { word: 'ನಮಸ್ಕಾರ', translation: 'Hello / Greetings', pronunciation: 'namaskara', example: 'ನಮಸ್ಕಾರ, ನೀವು ಹೇಗಿದ್ದೀರಿ?' },
+      { word: 'ಧನ್ಯವಾದಗಳು', translation: 'Thank you', pronunciation: 'dhanyavadagalu', example: 'ತುಂಬಾ ಧನ್ಯವಾದಗಳು' },
+      { word: 'ದಯವಿಟ್ಟು', translation: 'Please', pronunciation: 'dayavittu', example: 'ದಯವಿಟ್ಟು ಕುಳಿತುಕೊಳ್ಳಿ' },
+      { word: 'ಹೋಗಿ ಬರುತ್ತೇನೆ', translation: 'Goodbye', pronunciation: 'hogi baruthene', example: 'ಮತ್ತೆ ಸಿಗೋಣ, ಹೋಗಿ ಬರುತ್ತೇನೆ' },
+      { word: 'ಶುಭೋದಯ', translation: 'Good morning', pronunciation: 'shubhODaya', example: 'ಶುಭೋದಯ!' },
+      { word: 'ಕ್ಷಮಿಸಿ', translation: 'Sorry / Excuse me', pronunciation: 'kshamisi', example: 'ಕ್ಷಮಿಸಿ, ತಡವಾಯಿತು' },
+    ],
+    travel: [
+      { word: 'ರೈಲು', translation: 'Train', pronunciation: 'railu', example: 'ರೈಲು ಯಾವಾಗ ಬರುತ್ತದೆ?' },
+      { word: 'ಬಸ್ಸು', translation: 'Bus', pronunciation: 'bassu', example: 'ಬಸ್ಸು ನಿಲ್ದಾಣ ಎಲ್ಲಿದೆ?' },
+      { word: 'ಹೋಟೆಲ್', translation: 'Hotel', pronunciation: 'hotel', example: 'ಹೋಟೆಲ್ ಎಲ್ಲಿದೆ?' },
+      { word: 'ಬಲ', translation: 'Right', pronunciation: 'bala', example: 'ಬಲಕ್ಕೆ ತಿರುಗಿ' },
+      { word: 'ಎಡ', translation: 'Left', pronunciation: 'eda', example: 'ಎಡಕ್ಕೆ ಹೋಗಿ' },
+      { word: 'ಎಷ್ಟು', translation: 'How much', pronunciation: 'eshtu', example: 'ಇದರ ಬೆಲೆ ಎಷ್ಟು?' },
+    ],
+    food: [
+      { word: 'ನೀರು', translation: 'Water', pronunciation: 'neeru', example: 'ಸ್ವಲ್ಪ ನೀರು ಕೊಡಿ' },
+      { word: 'ಆಹಾರ', translation: 'Food', pronunciation: 'aahara', example: 'ಆಹಾರ ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ' },
+      { word: 'ಟೀ', translation: 'Tea', pronunciation: 'tea', example: 'ಒಂದು ಟೀ ಕೊಡಿ' },
+      { word: 'ಅನ್ನ', translation: 'Rice', pronunciation: 'anna', example: 'ಅನ್ನ ಮತ್ತು ಸಾರು' },
+      { word: 'ಸಿಹಿ', translation: 'Sweet', pronunciation: 'sihi', example: 'ನನಗೆ ಸಿಹಿ ಇಷ್ಟ' },
+    ],
+    conversation: [
+      { word: 'ನೀವು', translation: 'You (formal)', pronunciation: 'neevu', example: 'ನೀವು ಹೇಗಿದ್ದೀರಿ?' },
+      { word: 'ನಾನು', translation: 'I / Me', pronunciation: 'naanu', example: 'ನಾನು ಚೆನ್ನಾಗಿದ್ದೇನೆ' },
+      { word: 'ಹೌದು', translation: 'Yes', pronunciation: 'houdu', example: 'ಹೌದು, ಖಂಡಿತ' },
+      { word: 'ಇಲ್ಲ', translation: 'No', pronunciation: 'illa', example: 'ಇಲ್ಲ, ಧನ್ಯವಾದಗಳು' },
+      { word: 'ಏನು', translation: 'What', pronunciation: 'enu', example: 'ನಿಮಗೆ ಏನು ಬೇಕು?' },
+      { word: 'ಎಲ್ಲಿ', translation: 'Where', pronunciation: 'elli', example: 'ಮಾರುಕಟ್ಟೆ ಎಲ್ಲಿದೆ?' },
+    ],
+  },
 }
 
 // Fallback vocabulary for unsupported languages
@@ -131,6 +230,18 @@ const FALLBACK_VOCAB = {
     { word: 'हाँ', translation: 'Yes', pronunciation: 'haan', example: 'हाँ' },
     { word: 'नहीं', translation: 'No', pronunciation: 'nahin', example: 'नहीं' },
     { word: 'क्या', translation: 'What', pronunciation: 'kya', example: 'क्या?' },
+  ],
+  tech: [
+    { word: 'टेक्नोलॉजी', translation: 'Technology', pronunciation: 'technology', example: 'नयी टेक्नोलॉजी' },
+    { word: 'कंप्यूटर', translation: 'Computer', pronunciation: 'computer', example: 'मेरा कंप्यूटर' },
+  ],
+  arts: [
+    { word: 'कला', translation: 'Art', pronunciation: 'kala', example: 'सुंदर कला' },
+    { word: 'संगीत', translation: 'Music', pronunciation: 'sangeet', example: 'अच्छा संगीत' },
+  ],
+  sports: [
+    { word: 'खेल', translation: 'Sport / Game', pronunciation: 'khel', example: 'मुझे खेल पसंद है' },
+    { word: 'गेंद', translation: 'Ball', pronunciation: 'gend', example: 'गेंद लाओ' },
   ],
 }
 
@@ -155,11 +266,20 @@ const AGE_CONFIG = {
 }
 
 // ── Get vocab bank for a language/goal combo ─────────────────────────────────
-function getVocabForGoal(languageId, goal) {
+function getVocabForGoal(languageId, goal, interests = '') {
   const bank = VOCABULARY_BANKS[languageId] || FALLBACK_VOCAB
   const topics = GOAL_TOPICS[goal] || ['greetings', 'conversation', 'food']
+  
+  const activeTopics = [...topics]
+  const interestLower = (interests || '').toLowerCase()
+  if (interestLower && bank[interestLower] && !activeTopics.includes(interestLower)) {
+    activeTopics.push(interestLower)
+  } else if (interestLower && FALLBACK_VOCAB[interestLower] && !activeTopics.includes(interestLower)) {
+    activeTopics.push(interestLower)
+  }
+
   const result = []
-  for (const topic of topics) {
+  for (const topic of activeTopics) {
     const topicVocab = bank[topic] || FALLBACK_VOCAB[topic] || []
     result.push(...topicVocab)
   }
@@ -173,13 +293,14 @@ function getVocabForGoal(languageId, goal) {
 }
 
 // ── Generate exercises from vocab ────────────────────────────────────────────
-function generateExercises(vocab, ageConfig, lessonIndex = 0) {
+function generateExercises(vocab, ageConfig, lessonIndex = 0, learningStyle = 'balanced') {
   const exercises = []
   const maxItems = Math.min(vocab.length, ageConfig.maxVocab)
   const selectedVocab = vocab.slice(0, maxItems)
+  const style = (learningStyle || 'balanced').toLowerCase()
 
   // 1. Multiple choice — what does X mean?
-  if (selectedVocab.length >= 1) {
+  if (selectedVocab.length >= 1 && style !== 'auditory') {
     const target = selectedVocab[0]
     const distractors = vocab
       .filter((v) => v.word !== target.word)
@@ -197,7 +318,7 @@ function generateExercises(vocab, ageConfig, lessonIndex = 0) {
   }
 
   // 2. Listening exercise — TTS audio + select word
-  if (selectedVocab.length >= 2) {
+  if (selectedVocab.length >= 2 && style !== 'kinesthetic') {
     const target = selectedVocab[1]
     const distractors = selectedVocab
       .filter((v) => v.word !== target.word)
@@ -216,7 +337,7 @@ function generateExercises(vocab, ageConfig, lessonIndex = 0) {
   }
 
   // 3. Speaking exercise — TTS model + STT
-  if (selectedVocab.length >= 1) {
+  if (selectedVocab.length >= 1 && style !== 'visual') {
     const target = selectedVocab[lessonIndex % selectedVocab.length] || selectedVocab[0]
     exercises.push({
       id: `ex-speak-${lessonIndex}-2`,
@@ -243,7 +364,7 @@ function generateExercises(vocab, ageConfig, lessonIndex = 0) {
   }
 
   // 5. Matching (for older kids/adults with enough vocab)
-  if (selectedVocab.length >= 4 && ageConfig.complexity !== 'simple') {
+  if (selectedVocab.length >= 4 && ageConfig.complexity !== 'simple' && style !== 'auditory') {
     const pairs = selectedVocab.slice(0, 4).map((v) => ({ word: v.word, meaning: v.translation }))
     exercises.push({
       id: `ex-match-${lessonIndex}-4`,
@@ -254,13 +375,27 @@ function generateExercises(vocab, ageConfig, lessonIndex = 0) {
     })
   }
 
+  // Ensure minimum exercises based on ageConfig if some were skipped
+  while (exercises.length > 0 && exercises.length < ageConfig.exercisesPerLesson) {
+    // Add extra multiple-choice if we need more exercises
+    const randomVocab = selectedVocab[Math.floor(Math.random() * selectedVocab.length)]
+    exercises.push({
+      id: `ex-mcq-extra-${lessonIndex}-${exercises.length}`,
+      type: 'multiple-choice',
+      prompt: `Review: What does "${randomVocab.word}" mean?`,
+      options: [randomVocab.translation, 'Dummy A', 'Dummy B', 'Dummy C'].sort(() => Math.random() - 0.5),
+      correctAnswer: randomVocab.translation,
+      xp: 10,
+    })
+  }
+
   return exercises.slice(0, ageConfig.exercisesPerLesson)
 }
 
 // ── Build a lesson object ─────────────────────────────────────────────────────
-function buildLesson(languageId, goal, ageRange, lessonIndex, level) {
+function buildLesson(languageId, goal, ageRange, lessonIndex, level, learningStyle = 'balanced', interests = 'culture') {
   const ageConfig = AGE_CONFIG[ageRange] || AGE_CONFIG['adult']
-  const allVocab = getVocabForGoal(languageId, goal)
+  const allVocab = getVocabForGoal(languageId, goal, interests)
 
   // Rotate vocab windows per lesson (different words each lesson)
   const windowSize = ageConfig.maxVocab
@@ -281,7 +416,7 @@ function buildLesson(languageId, goal, ageRange, lessonIndex, level) {
   }
   const lessonName = topicLabels[lessonIndex] || `Lesson ${lessonIndex + 1}`
 
-  const exercises = generateExercises(window, ageConfig, lessonIndex)
+  const exercises = generateExercises(window, ageConfig, lessonIndex, learningStyle)
 
   return {
     id: `${languageId}-dynamic-${lessonIndex}`,
@@ -333,23 +468,23 @@ export function generateLearningPlan({ languageId, ageRange, goal, level, assess
 }
 
 // ── Get dynamic lessons for a user ───────────────────────────────────────────
-export function getDynamicLessons({ languageId, goal, ageRange, level, count = 10 }) {
+export function getDynamicLessons({ languageId, goal, ageRange, level, learningStyle, interests, count = 10 }) {
   const lessons = []
   for (let i = 0; i < count; i++) {
-    lessons.push(buildLesson(languageId, goal, ageRange, i, level))
+    lessons.push(buildLesson(languageId, goal, ageRange, i, level, learningStyle, interests))
   }
   return lessons
 }
 
 // ── Get a single dynamic lesson by index ─────────────────────────────────────
-export function getDynamicLesson({ languageId, goal, ageRange, level, lessonIndex }) {
-  return buildLesson(languageId, goal, ageRange, lessonIndex, level)
+export function getDynamicLesson({ languageId, goal, ageRange, level, learningStyle, interests, lessonIndex }) {
+  return buildLesson(languageId, goal, ageRange, lessonIndex, level, learningStyle, interests)
 }
 
 // ── Generate dynamic assessment questions ────────────────────────────────────
-export function generateAssessmentQuestions({ languageId, ageRange, goal, count = 6 }) {
+export function generateAssessmentQuestions({ languageId, ageRange, goal, interests, count = 6 }) {
   const ageConfig = AGE_CONFIG[ageRange] || AGE_CONFIG['adult']
-  const allVocab = getVocabForGoal(languageId, goal || 'conversation')
+  const allVocab = getVocabForGoal(languageId, goal || 'conversation', interests)
   const shuffled = allVocab.sort(() => Math.random() - 0.5)
   const questions = []
 

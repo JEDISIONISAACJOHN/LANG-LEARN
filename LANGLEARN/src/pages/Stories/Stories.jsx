@@ -4,7 +4,7 @@ import { useAuth } from '../../services/auth'
 import { useTheme } from '../../services/themeContext'
 import { getStoriesByLanguage } from '../../data/stories'
 import { getLanguageById } from '../../data/languages'
-import AppSidebar from '../../components/Navigation/AppSidebar'
+
 import RightSidebar from '../../components/RightSidebar/RightSidebar'
 import { BookOpen, Sparkles, Trophy, CheckCircle, Play } from 'lucide-react'
 
@@ -20,12 +20,12 @@ export default function Stories() {
   const completedStories = user?.completedStories || []
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
+    <div className="min-h-screen bg-transparent flex justify-center pb-20 md:pb-0 text-slate-800 dark:text-slate-100 font-sans">
       {/* Left Sidebar */}
-      <AppSidebar />
+
 
       {/* Main Content */}
-      <main className="flex-1 max-w-[680px] md:ml-64 px-4 py-6 md:py-8 space-y-6">
+      <main className="flex-1 max-w-[680px] px-4 py-6 md:py-8 space-y-6">
         {/* Header banner */}
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 p-6 md:p-8 text-white shadow-xl mb-8">
           <div className="relative z-10">
